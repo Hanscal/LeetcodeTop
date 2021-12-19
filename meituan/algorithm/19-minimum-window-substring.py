@@ -42,7 +42,7 @@ class Solution:
                     if window[d] == need[d]:
                         valid -= 1
                     window[d] -= 1
-        return s[start:start + length] if length != len(s) +1 else ''
+        return s[start:start + length] if length != len(s) + 1 else ''
 
 
 

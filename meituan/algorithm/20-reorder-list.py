@@ -60,26 +60,69 @@ class Solution:
 
         return head
 
-def createTree(nums=[1,2,3,4]):
-    if nums:
-        head = root = ListNode(nums[0])
-        for n in nums[1:]:
-            tmp = ListNode(n)
-            root.next = tmp
-            root = root.next
-        return head
-    else:
-        return ListNode()
+class Node_handle():
+    def __init__(self):
+        self.cur_node = None
 
-def printNode(node):
-    while node:
-        print(node.val)
-        node = node.next
+    # 查找
+    def find(self,node,num,a = 0):
+        while node:
+            if a == num:
+                return node
+            a += 1
+            node = node.next
+
+    # 增加
+    def add(self,data):
+        node = ListNode()
+        node.val = data
+        node.next = self.cur_node
+        self.cur_node = node
+        return node
+
+    # 打印
+    def printNode(self,node):
+        out = []
+        while node:
+            print('value: ', node.val)
+            out.append(node.val)
+            node = node.next
+        return out
+
+    # 删除
+    def delete(self,node,num,b = 1):
+        if num == 0:
+            node = node.next
+            return node
+        while node and node.next:
+            if num == b:
+                node.next = node.next.next
+            b += 1
+            node = node.next
+        return node
+
+    # 翻转
+    def reverse(self,nodelist):
+        list = []
+        while nodelist:
+            list.append(nodelist.val)
+            nodelist = nodelist.next
+        result = ListNode()
+        result_handle =Node_handle()
+        for i in list:
+            result = result_handle.add(i)
+        return result
+
 
 if __name__ == '__main__':
-    root = createTree([1,2,3,4])
-    printNode(root)
+    nh = Node_handle()
+    a = [1,2,3,4]
+    a.reverse()
+    for i in a:
+        root = nh.add(i)
+    nh.printNode(root)
     s = Solution()
     res = s.reorderList(root)
-    printNode(res)
+    out = nh.printNode(res)
+    assert out == [1,4,2,3]
 
