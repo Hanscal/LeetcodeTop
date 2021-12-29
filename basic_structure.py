@@ -5,6 +5,8 @@
 @Author  : hcai
 @Email   : hua.cai@unidt.com
 """
+from typing import List
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
@@ -61,7 +63,7 @@ class TreeNode:
         self.right = right
 
 class TreeHandle:
-    def createTree(self, root):
+    def createTree(self, root:List):
         if not root:
             return root
 
