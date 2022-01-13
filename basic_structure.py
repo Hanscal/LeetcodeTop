@@ -63,6 +63,9 @@ class TreeNode:
         self.right = right
 
 class TreeHandle:
+    def __init__(self):
+        self.res_list = []
+
     def createTree(self, root:List):
         if not root:
             return root
@@ -76,7 +79,7 @@ class TreeHandle:
 
             item = root[index]
             index += 1
-            if item:
+            if item is not None:
                 leftNumber = item
                 node.left = TreeNode(leftNumber)
                 nodeQueue.append(node.left)
@@ -86,7 +89,7 @@ class TreeHandle:
 
             item = root[index]
             index += 1
-            if item:
+            if item is not None:
                 rightNumber = item
                 node.right = TreeNode(rightNumber)
                 nodeQueue.append(node.right)
@@ -95,9 +98,31 @@ class TreeHandle:
 
         return Root
 
+    # def printTree(self, root):
+    #     if root:
+    #         self.printTree(root.left)
+    #         print(root.val)
+    #
+    #         self.printTree(root.right)
+
     def printTree(self, root):
-        if root:
-            self.printTree(root.left)
-            print(root.val)
-            self.printTree(root.right)
+        # 使用列表作为队列
+        queue = []
+        # 将首个根节点添加到队列中
+        queue.append(root)
+        # 当队列不为空时进行遍历
+        while queue:
+            # 从队列头部取出一个节点并判断其是否有左右节点
+            # 若有子节点则把对应子节点添加到队列中，且优先判断左节点
+            temp = queue.pop(0)
+            left = temp.left
+            right = temp.right
+            if left:
+                queue.append(left)
+            if right:
+                queue.append(right)
+            print(temp.val)
+            self.res_list.append(temp.val)
+        return self.res_list
+
 
