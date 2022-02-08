@@ -11,6 +11,8 @@
 回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。例如，121 是回文，而 123 不是。
 """
 
+# 进阶：你能不将整数转为字符串来解决这个问题吗？
+# 通过取整和取余操作获取整数中对应的数字进行比较。
 class Solution:
     def isPalindrome(self, x: int) -> bool:
         x_str = str(x)
@@ -19,8 +21,20 @@ class Solution:
                 return False
         return True
 
+# 将数翻转
+class Solution1:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0 or (x % 10 == 0 and x != 0):
+            return False
+        revertedNumber = 0
+        num = x
+        while num != 0:
+            revertedNumber = revertedNumber * 10 + num % 10
+            num //= 10
+        return x == revertedNumber
+
 if __name__ == '__main__':
-    s = Solution()
+    s = Solution1()
     res = s.isPalindrome(x=121)
     print(res)
     assert res == True
