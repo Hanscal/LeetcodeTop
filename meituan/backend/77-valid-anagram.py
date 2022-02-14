@@ -17,17 +17,17 @@ class Solution:
         if len(s) != len(t):
             return False
         hash_map = {}
-        for i in range(len(s)):
+        for i in s:
             hash_map[i] = hash_map.get(i, 0) + 1
 
-        for i in range(len(s)):
+        for i in t:
             hash_map[i] = hash_map.get(i, 0) - 1
-            if hash_map[i] < 0: # 在长度相等的情况下肯定会出现小于0的情况
+            if hash_map[i] < 0:  # 在长度相等的情况下肯定会出现小于0的情况
                 return False
         return True
 
 if __name__ == '__main__':
     s = Solution()
-    res = s.isAnagram(s = "anagram", t = "nagaram")
+    res = s.isAnagram(s = "rat", t = "cat")
     print(res)
-    assert res == True
+    assert res == False
